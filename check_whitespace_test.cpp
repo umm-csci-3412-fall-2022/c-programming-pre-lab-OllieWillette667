@@ -1,25 +1,33 @@
 #include <gtest/gtest.h>
 
 #include "check_whitespace.h"
-
+char*temp;
 TEST(strip, EmptyString) {
     ASSERT_STREQ("", strip(""));
 }
 
 TEST(strip, NoWhitespace) {
-    ASSERT_STREQ("frog", strip("frog"));
+    temp = strip("frog");
+    ASSERT_STREQ("frog", temp);
+    free(temp);
 }
 
 TEST(strip, WhitespaceOnFront) {
-    ASSERT_STREQ("frog", strip("   frog"));
+    temp = strip("   frog");
+    ASSERT_STREQ("frog",temp);
+    free(temp);
 }
 
 TEST(strip, WhitespaceOnBack) {
-    ASSERT_STREQ("frog", strip("frog  "));
+    temp=strip("frog  ");
+    ASSERT_STREQ("frog",temp);
+    free(temp);
 }
 
-TEST(strip, WhitespaceOnBothEnds) {
-    ASSERT_STREQ("frog", strip("  frog     "));
+TEST(strip, WhitespaceOnBothEinds) {
+    temp=strip("  frog     ");
+    ASSERT_STREQ("frog",temp);
+    free(temp);
 }
 
 TEST(is_clean, EmptyString) {
@@ -39,7 +47,7 @@ TEST(is_clean, WhitespaceOnBack) {
 }
 
 TEST(is_clean, WhitespaceOnBothEnds) {
-    ASSERT_FALSE(is_clean(" University of Minnesota Morris"    ));
+    ASSERT_FALSE(is_clean(" University of Minnesota Morris"));
 }
 
 int main(int argc, char *argv[]) {
